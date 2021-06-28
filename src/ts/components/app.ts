@@ -1,7 +1,10 @@
 class App {
-  constructor(private readonly $element: HTMLDivElement) {
+  private readonly $element: HTMLDivElement;
+
+  constructor($element: HTMLDivElement) {
+    this.$element = $element;
     console.log(this.$element);
   }
 }
 
-export default App;
+export default new App(document.querySelector('#app')as HTMLDivElement);

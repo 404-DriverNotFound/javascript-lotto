@@ -1,6 +1,6 @@
 class LottoInput {
   constructor() {
-    if (true) return;
-    const a:String = 'abc';
   }
 }
+
+export default LottoInput;
