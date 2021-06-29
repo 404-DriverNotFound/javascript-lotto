@@ -59,7 +59,7 @@ class App {
 
   estimate(winnings: string[]) {
     this.state.winnings = winnings;
-    console.log(this.state.winnings);
+    // this.lottoStatics.run();
   }
 }
 
