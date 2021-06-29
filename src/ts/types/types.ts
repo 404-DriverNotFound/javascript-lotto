@@ -19,18 +19,25 @@ type Lotto = {
 type LottoMachineState = {
   mode: boolean,
   budget: number,
-  lotteries: [Lotto] | [],
+  lotteries: Lotto[] | [],
   purchaseQuantity: number,
+  winnings: string[],
 }
 
-type LottoBoardState = {
+type LottoPurchaseState = {
   total: HTMLElement,
   tickets: HTMLElement,
   balls: HTMLElement,
-  lotteries: [Lotto] | [],
+  lotteries: Lotto[] | [],
+}
+
+type LottoWinningState = {
+  winningNumbers: number[] | [],
+  bonusNumber: number,
+  openModalButton: HTMLButtonElement,
 }
 
 export {
   LottoComponent, LottoInputProps, Lotto, LottoMachineState,
-  LottoBoardState,
+  LottoPurchaseState, LottoWinningState,
 };

@@ -1,5 +1,6 @@
 import { LottoComponent, LottoInputProps } from '../types/types.js';
-import { isValidCost } from '../utils/utils.js';
+import { isValidRange } from '../utils/utils.js';
+import { MAX_TICKET_COST, TICKET_COST } from '../constant/constant.js';
 
 class LottoInput implements LottoComponent {
   private readonly $element: HTMLInputElement;
@@ -13,7 +14,7 @@ class LottoInput implements LottoComponent {
     const inputNode: HTMLInputElement = this.$element.querySelector('input')!;
     this.$element.addEventListener('click', ({ target } : { target: EventTarget | null}) => {
       if (target && target instanceof HTMLButtonElement) {
-        if (!isValidCost(inputNode.value)) {
+        if (!isValidRange(inputNode.value, TICKET_COST, MAX_TICKET_COST)) {
           alert('1000원 ~ 100000원 이내로 구매가 가능합니다.');
           return;
         }
@@ -25,7 +26,7 @@ class LottoInput implements LottoComponent {
     this.$element.addEventListener('keydown', (event: KeyboardEvent) => {
       const { key } = event;
       if (key === 'Enter') {
-        if (!isValidCost(inputNode.value)) {
+        if (!isValidRange(inputNode.value, TICKET_COST, MAX_TICKET_COST)) {
           alert('1000원 ~ 100000원 이내로 구매가 가능합니다.');
           return;
         }

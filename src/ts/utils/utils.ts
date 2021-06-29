@@ -1,13 +1,14 @@
 import {
   TICKET_COST,
-  MAX_TICKET_COST,
   LOTTO_NUMBER_START,
   LOTTO_NUMBER_END, LOTTO_LENGTH,
 } from '../constant/constant.js';
 import { Lotto } from '../types/types.js';
 
-const between = (value: number, start: number, end: number) => (value >= start && value <= end);
-const isValidCost = (cost: string): boolean => between(Number(cost), TICKET_COST, MAX_TICKET_COST);
+const between = (value: number, start: number, end: number)
+  : boolean => (value >= start && value <= end);
+const isValidRange = (cost: string, start: number, end: number)
+  : boolean => between(Number(cost), start, end);
 const defaultPurchaseQuantity = (budget: number) => Math.floor(budget / TICKET_COST);
 
 const getRandomInt = (start: number, end: number): number => Math.floor(
@@ -27,4 +28,4 @@ const getRandomLottery = (): Lotto => {
 const makeLotto = (purchaseQuantity: number): [Lotto] => [...new Array(purchaseQuantity)]
   .map(() => getRandomLottery())as [Lotto];
 
-export { isValidCost, defaultPurchaseQuantity, makeLotto };
+export { isValidRange, defaultPurchaseQuantity, makeLotto };
