@@ -4,6 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^6.3.0"
-  }
+    "@types/eslint": "^7.2.13",
+    "@types/node": "^15.12.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "cypress": "^7.6.0",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "typescript": "^4.3.4"
+  },
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
+  "dependencies": {},
+  "repository": "https://github.com/kmin-283/javascript-lotto.git"
 }
