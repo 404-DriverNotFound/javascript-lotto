@@ -9,19 +9,10 @@ const ERROR_NUMBER_RANGE = '1 ~ 45사이의 숫자를 입력해주십시오.';
 const ERROR_COST_RANGE = '1000원 ~ 100000원 이내로 구매가 가능합니다.';
 const ERROR_MISSING_NUMBER = '번호를 모두 입력해주십시오.';
 
-const defaultLottery = {
-  first: -1,
-  second: -1,
-  third: -1,
-  fourth: -1,
-  fifth: -1,
-  sixth: -1,
-};
-
 export {
   AUTO, MANUAL, TICKET_COST, MAX_TICKET_COST,
   LOTTO_NUMBER_START, LOTTO_NUMBER_END,
-  LOTTO_LENGTH, defaultLottery,
+  LOTTO_LENGTH,
   ERROR_NUMBER_RANGE, ERROR_COST_RANGE,
   ERROR_MISSING_NUMBER,
 };

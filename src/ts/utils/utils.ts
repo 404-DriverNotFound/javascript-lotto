@@ -15,12 +15,22 @@ const getRandomInt = (start: number, end: number): number => Math.floor(
   Math.random() * (end - start) + start,
 );
 
+const isDuplicated = (container: Set<number>, value: number):boolean => container.has(value);
+
 const ascending = (a: number, b: number): number => a - b;
 
 const getRandomLottery = (): Lotto => {
   const lotto = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
+  const cache = new Set<number>();
   const numbers = [...new Array(LOTTO_LENGTH)]
-    .map(() => getRandomInt(LOTTO_NUMBER_START, LOTTO_NUMBER_END))
+    .map(() => {
+      let candidate = getRandomInt(LOTTO_NUMBER_START, LOTTO_NUMBER_END);
+      while (isDuplicated(cache, candidate)) {
+        candidate = getRandomInt(LOTTO_NUMBER_START, LOTTO_NUMBER_END);
+      }
+      cache.add(candidate);
+      return candidate;
+    })
     .sort(ascending);
   return lotto.reduce((o, k, i) => ({ ...o, [k]: numbers[i] }), {})as Lotto;
 };

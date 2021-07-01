@@ -15,7 +15,8 @@
     "typescript": "^4.3.4"
   },
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "build": "yarn tsc --w"
   },
   "dependencies": {},
   "repository": "https://github.com/kmin-283/javascript-lotto.git"

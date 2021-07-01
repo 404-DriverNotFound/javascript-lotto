@@ -19,7 +19,7 @@ class LottoBoard implements LottoComponent {
     });
   }
 
-  setPurchaseState(lotteries: Lotto[] | []) {
+  setPurchaseState(lotteries: Lotto[]) {
     this.lottoPurchase.setState(lotteries);
   }
 }

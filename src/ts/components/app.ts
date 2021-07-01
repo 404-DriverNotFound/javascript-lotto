@@ -1,7 +1,7 @@
 import LottoInput from './lottoInput.js';
 import { LottoMachineState } from '../types/types.js';
 import LottoBoard from './lottoBoard.js';
-import { AUTO } from '../constant/constant.js';
+import { AUTO, TICKET_COST } from '../constant/constant.js';
 import { defaultPurchaseQuantity, makeLotto } from '../utils/utils.js';
 
 // lotto machine
@@ -41,20 +41,23 @@ class App {
   }
 
   run(purchaseQuantity = defaultPurchaseQuantity(this.state.budget)) {
-    this.requestLotto(purchaseQuantity)
-      .makeLotto()
-      .lottoBoard.setPurchaseState(this.state.lotteries);
+    this.requestLotto(purchaseQuantity);
+    this.pay();
+    this.makeLotto();
   }
 
   requestLotto(purchaseQuantity: number) {
     this.state.purchaseQuantity = purchaseQuantity;
-    return this;
+  }
+
+  pay() {
+    this.state.budget -= TICKET_COST * this.state.purchaseQuantity;
   }
 
   makeLotto() {
     const lotteries = makeLotto(this.state.purchaseQuantity);
     this.state.lotteries = lotteries.concat(this.state.lotteries);
-    return this;
+    this.lottoBoard.setPurchaseState(this.state.lotteries);
   }
 
   estimate(winnings: string[]) {

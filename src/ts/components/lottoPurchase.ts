@@ -39,35 +39,32 @@ class LottoPurchase {
       });
   }
 
-  setState(lotteries: Lotto[] | []) {
+  setState(lotteries: Lotto[]) {
     this.state.lotteries = lotteries;
     this.render();
   }
 
   render() {
-    this.totalUpdate()
-      .ticketsUpdate()
-      .ballsUpdate();
+    this.totalUpdate();
+    this.ticketsUpdate();
+    this.ballsUpdate();
   }
 
   totalUpdate() {
     const { total } = this.state;
     total.textContent = boardView.total(this.state.lotteries.length);
-    return this;
   }
 
   ticketsUpdate() {
     const { tickets } = this.state;
     tickets.innerHTML = this.state.lotteries.map(() => boardView.tickets)
       .join('');
-    return this;
   }
 
   ballsUpdate() {
     const { balls } = this.state;
     balls.innerHTML = this.state.lotteries.map((lottery) => boardView.balls(lottery))
       .join('');
-    return this;
   }
 }
 

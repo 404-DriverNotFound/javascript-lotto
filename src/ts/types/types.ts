@@ -7,19 +7,12 @@ interface LottoInputProps {
   buy: (cost: string) => void;
 }
 
-type Lotto = {
-  'first': number,
-  'second': number,
-  'third': number,
-  'fourth': number,
-  'fifth': number,
-  'sixth': number,
-};
+type Lotto = [number, number, number, number, number, number, number];
 
 type LottoMachineState = {
   mode: boolean,
   budget: number,
-  lotteries: Lotto[] | [],
+  lotteries: Lotto[],
   purchaseQuantity: number,
   winnings: string[],
 }
@@ -28,11 +21,11 @@ type LottoPurchaseState = {
   total: HTMLElement,
   tickets: HTMLElement,
   balls: HTMLElement,
-  lotteries: Lotto[] | [],
+  lotteries: Lotto[],
 }
 
 type LottoWinningState = {
-  winningNumbers: number[] | [],
+  winningNumbers: number[],
   bonusNumber: number,
   openModalButton: HTMLButtonElement,
 }
