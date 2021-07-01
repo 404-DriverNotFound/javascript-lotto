@@ -10,7 +10,7 @@ class LottoBoard implements LottoComponent {
   private readonly lottoWinning;
 
   constructor({ $element, estimate }:
-    { $element: HTMLTableSectionElement, estimate: (winnings: number[]) => void}) {
+    { $element: HTMLTableSectionElement, estimate: (winnings: Lotto) => void}) {
     this.$element = $element;
     this.lottoPurchase = new LottoPurchase(this.$element.querySelector('.lotto-purchase')!);
     this.lottoWinning = new LottoWinning({

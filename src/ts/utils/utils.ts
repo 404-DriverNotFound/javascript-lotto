@@ -35,6 +35,13 @@ const getRandomLottery = (): Lotto => {
 const makeLotto = (purchaseQuantity: number): [Lotto] => [...new Array(purchaseQuantity)]
   .map(() => getRandomLottery())as [Lotto];
 
+const getWinnings = (lotteries: number[], winnings: number) => {
+  lotteries.map((lottery) => {
+    const candidate = new Set<number>(lottery);
+    const winSet = new Set<number>(winnings);
+  });
+};
+
 export {
   isValidRange, defaultPurchaseQuantity, isDuplicated, ascending, makeLotto,
 };

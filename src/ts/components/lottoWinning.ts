@@ -1,4 +1,4 @@
-import { LottoWinningState } from '../types/types.js';
+import { Lotto, LottoWinningState } from '../types/types.js';
 import { ascending, isValidRange } from '../utils/utils.js';
 import {
   ERROR_DUPLICATED_NUMBER,
@@ -13,7 +13,7 @@ class LottoWinning {
   private state: LottoWinningState;
 
   constructor({ $element, estimate } :
-    { $element: HTMLFormElement, estimate: (winnings: number[]) => void }) {
+    { $element: HTMLFormElement, estimate: (winnings: Lotto) => void }) {
     this.$element = $element;
     this.state = {
       winningNumbers: [],
@@ -23,7 +23,7 @@ class LottoWinning {
     this.addEvent(estimate);
   }
 
-  addEvent(estimate: (winnings: number[]) => void) {
+  addEvent(estimate: (winnings: Lotto) => void) {
     this.state.openModalButton.addEventListener('click', () => {
       const bonusNode = this.$element.querySelector('.bonus-number')as HTMLInputElement;
       const { value } = bonusNode;
@@ -47,7 +47,7 @@ class LottoWinning {
       if (winnings.length + LOTTO_BONUS !== new Set<number>(winnings.concat(bonusNumber)).size) {
         return alert(ERROR_DUPLICATED_NUMBER);
       }
-      estimate(winnings.sort(ascending).concat(bonusNumber));
+      estimate(winnings.sort(ascending).concat(bonusNumber)as Lotto);
     });
   }
 }

@@ -1,5 +1,5 @@
 import LottoInput from './lottoInput.js';
-import { LottoMachineState } from '../types/types.js';
+import { Lotto, LottoMachineState } from '../types/types.js';
 import LottoBoard from './lottoBoard.js';
 import { AUTO, TICKET_COST } from '../constant/constant.js';
 import { defaultPurchaseQuantity, makeLotto } from '../utils/utils.js';
@@ -64,9 +64,9 @@ class App {
     this.lottoBoard.setPurchaseState(this.state.lotteries);
   }
 
-  estimate(winnings: number[]) {
+  estimate(winnings: Lotto) {
     this.state.winnings = winnings;
-    this.lottoStatistics.run();
+    this.lottoStatistics.run(this.state.lotteries, this.state.winnings);
   }
 }
 
