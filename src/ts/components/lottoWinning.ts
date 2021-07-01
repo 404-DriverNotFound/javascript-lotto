@@ -1,7 +1,8 @@
 import { LottoWinningState } from '../types/types.js';
-import { isValidRange } from '../utils/utils.js';
+import { ascending, isValidRange } from '../utils/utils.js';
 import {
-  ERROR_MISSING_NUMBER, ERROR_NUMBER_RANGE,
+  ERROR_DUPLICATED_NUMBER,
+  ERROR_MISSING_NUMBER, ERROR_NUMBER_RANGE, LOTTO_BONUS, LOTTO_LENGTH,
   LOTTO_NUMBER_END,
   LOTTO_NUMBER_START,
 } from '../constant/constant.js';
@@ -12,7 +13,7 @@ class LottoWinning {
   private state: LottoWinningState;
 
   constructor({ $element, estimate } :
-    { $element: HTMLFormElement, estimate: (winnings: string[]) => void }) {
+    { $element: HTMLFormElement, estimate: (winnings: number[]) => void }) {
     this.$element = $element;
     this.state = {
       winningNumbers: [],
@@ -22,32 +23,31 @@ class LottoWinning {
     this.addEvent(estimate);
   }
 
-  addEvent(estimate: (winnings: string[]) => void) {
+  addEvent(estimate: (winnings: number[]) => void) {
     this.state.openModalButton.addEventListener('click', () => {
       const bonusNode = this.$element.querySelector('.bonus-number')as HTMLInputElement;
-      if (!bonusNode.value) {
-        alert(ERROR_MISSING_NUMBER);
-        return;
+      const { value } = bonusNode;
+      if (!value) {
+        return alert(ERROR_MISSING_NUMBER);
       }
-      if (!isValidRange(bonusNode.value, LOTTO_NUMBER_START, LOTTO_NUMBER_END)) {
-        alert(ERROR_NUMBER_RANGE);
-        return;
+      if (!isValidRange(Number(value), LOTTO_NUMBER_START, LOTTO_NUMBER_END)) {
+        return alert(ERROR_NUMBER_RANGE);
       }
-      const bonusNumber = [bonusNode.value];
-      const winnings = Array.from(this.$element.querySelectorAll('.winning-number'))
-        .map((winning) => {
-          if (winning instanceof HTMLInputElement) {
-            if (isValidRange(winning.value, LOTTO_NUMBER_START, LOTTO_NUMBER_END)) {
-              return winning.value;
-            }
-            alert(ERROR_NUMBER_RANGE);
-            return '';
-          }
-          alert(ERROR_MISSING_NUMBER);
-          return '';
-        })
-        .concat(bonusNumber);
-      estimate(winnings);
+      const bonusNumber: number[] = [Number(value)];
+      const winnings: number[] = Array.from(
+        this.$element.querySelectorAll<HTMLInputElement>('.winning-number'),
+      ).map((element) => Number(element.value));
+      if (winnings.length < LOTTO_LENGTH) {
+        return alert(ERROR_MISSING_NUMBER);
+      }
+      if (winnings.some((winning) => !isValidRange(winning,
+        LOTTO_NUMBER_START, LOTTO_NUMBER_END))) {
+        return alert(ERROR_NUMBER_RANGE);
+      }
+      if (winnings.length + LOTTO_BONUS !== new Set<number>(winnings.concat(bonusNumber)).size) {
+        return alert(ERROR_DUPLICATED_NUMBER);
+      }
+      estimate(winnings.sort(ascending).concat(bonusNumber));
     });
   }
 }

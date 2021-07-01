@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('lotto', () => {
   it('basic cost input', () => {
     cy.visit('./index.html');
@@ -6,7 +7,7 @@ describe('lotto', () => {
     cy.get('.lotto-input button')
       .click();
     cy.get('.total')
-      .should('have.text','총 1 개를 구매하였습니다.');
+      .should('have.text', '총 1 개를 구매하였습니다.');
     cy.get('.tickets')
       .find('span')
       .should('have.length', 1);

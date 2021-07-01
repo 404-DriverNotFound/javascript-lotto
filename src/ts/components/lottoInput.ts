@@ -14,7 +14,7 @@ class LottoInput implements LottoComponent {
     const inputNode: HTMLInputElement = this.$element.querySelector('input')!;
     this.$element.addEventListener('click', ({ target } : { target: EventTarget | null}) => {
       if (target && target instanceof HTMLButtonElement) {
-        if (!isValidRange(inputNode.value, TICKET_COST, MAX_TICKET_COST)) {
+        if (!isValidRange(Number(inputNode.value), TICKET_COST, MAX_TICKET_COST)) {
           alert(ERROR_COST_RANGE);
           return;
         }
@@ -26,7 +26,7 @@ class LottoInput implements LottoComponent {
     this.$element.addEventListener('keydown', (event: KeyboardEvent) => {
       const { key } = event;
       if (key === 'Enter') {
-        if (!isValidRange(inputNode.value, TICKET_COST, MAX_TICKET_COST)) {
+        if (!isValidRange(Number(inputNode.value), TICKET_COST, MAX_TICKET_COST)) {
           alert(ERROR_COST_RANGE);
           return;
         }

@@ -14,7 +14,7 @@ type LottoMachineState = {
   budget: number,
   lotteries: Lotto[],
   purchaseQuantity: number,
-  winnings: string[],
+  winnings: number[],
 }
 
 type LottoPurchaseState = {
