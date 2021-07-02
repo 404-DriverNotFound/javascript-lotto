@@ -38,7 +38,8 @@ class App {
   }
 
   buy(cost: string) {
-    this.state.budget = Number(cost);
+    this.state.budget += Number(cost);
+    this.lottoStatistics.setBudget(Number(this.state.budget));
     if (this.state.mode === AUTO) {
       this.run();
     }

@@ -47,7 +47,7 @@ class LottoWinning {
       if (winnings.length + LOTTO_BONUS !== new Set<number>(winnings.concat(bonusNumber)).size) {
         return alert(ERROR_DUPLICATED_NUMBER);
       }
-      estimate(winnings.sort(ascending).concat(bonusNumber)as Lotto);
+      return estimate(winnings.sort(ascending).concat(bonusNumber)as Lotto);
     });
   }
 }
